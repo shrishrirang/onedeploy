@@ -1,0 +1,1 @@
+%~dp0\bin\DeployPrivateKudu.cmd "https://%username%:%password%@%sitename%.scm.azurewebsites.net/deploy"
