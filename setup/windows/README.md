@@ -11,7 +11,7 @@ Example:
 ```cmd
     set username=$my-testsite1
     set password=my-testsite1-password
-    set site=my-testsite1
+    set sitename=my-testsite1
 ```
 - Now, run the following script to update your site to use custom Kudu bits
 ```cmd
