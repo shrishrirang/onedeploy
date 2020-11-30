@@ -3,23 +3,27 @@
 API is hosted in the Kudu website at `POST /api/publish`.
 
 Query parameters:
-- type=<war|jar|ear|lib|startup|static|zip>
-    - Required parameter.
-    - type=war will deploy the war file to /home/site/wwwroot/app.war
-    - type=war&path=webapps/\<appname\> will behave exactly like wardeploy by unzipping app to /home/site/wwwroot/webapps/\<appname\>
-    - type=jar will deploy the war file to /home/site/wwwroot/app.jar
-    - type=ear will deploy the war file to /home/site/wwwroot/app.ear.
-    - type=lib will deploy the jar to /home/site/libs. `path` parameter needs to be specified.
-    - type=static will deploy the script to /home/site/scripts. `path` parameter needs to be specified.
-    - type=startup will deploy the script as startup.sh (Linux) or startup.cmd (Windows) to /home/site/scripts/. `path` parameter is not supported.
-    - type=zip will unzip the zip to /home/site/wwwroot. `path` parameter is optional.
-- path=\<path\> (Required or Optional, depending on the type parameter)
-- ignorestack=\<true|false\> (Optional. However, required until November)
+- `type=<war|jar|ear|lib|startup|static|zip>`
+    - Required parameter
+    - `type=war` will deploy the war file to `/home/site/wwwroot/app.war` if `path` is _not_ specified
+    - `type=war&path=webapps/<appname\` will behave exactly like wardeploy by unzipping app to /home/site/wwwroot/webapps/\<appname\>
+    - `type=jar` will deploy the war file to `/home/site/wwwroot/app.jar`. `path` parameter will be ignored
+    - `type=ear` will deploy the war file to `/home/site/wwwroot/app.ear`. `path` parameter will be ignored
+    - `type=lib` will deploy the jar to /home/site/libs. `path` parameter must be specified
+    - `type=static` will deploy the script to `/home/site/scripts`. `path` parameter must specified
+    - `type=startup` will deploy the script as `startup.sh` (Linux) or `startup.cmd` (Windows) to `/home/site/scripts/`. `path` parameter will be ignored
+    - `type=zip` will unzip the zip to `/home/site/wwwroot`. `path` parameter is optional.
+- `path=<path>` (Required or Optional, depending on the type parameter)
+    - This can be either a relative path or an absolute path
+        - The relative path will be interpreted relative to the default root directory for the artifact `type` being deployed. Example: For `type=script`, relative path `helper.sh` will deploy to `/home/site/scripts/helper.sh`
+        - The absolute path must match the default root directory for the artifact `type` being deployed. Example: For `type=script`, absolute path `/home/site/scripts/helper.sh` is valid, but `/home/site/scripts2/helper.sh` is invalid.
+- `ignorestack=<true|false>` (Optional. However, required until November)
     - OneDeploy looks for `WEBSITE_STACK` environment variable that is injected by the platform to make sure that you are deploying war to a Tomcat app, jar to a Java SE app and so on. However, this environment variable is not being injected by the platform yet and will be available in November. Until then `ignorestack=true` can be used. This can also be used later for deploying to HttpPlatformHandler sites (Windows) or custom container sites (Linux) where the stack is controlled by the app developer
-- restart=<true|false> (Optional)
+- `restart=<true|false>` (Optional)
     - By default, any OneDeploy call will restart the site. This behavior can be altered using `restart=false`
-- clean=<true|false> (Optional)
+- `clean=<true|false>` (Optional)
     - By default `type=zip` and `type=war&path=webapps/<appname>` performs clean deployment. All other types of artifacts will be deployed incrementally. The default behavior for any artifact type can be changed using the `clean` parameter. A clean deployment nukes the default directory associated with the type of artifact being deployed.
+- Default root directory for various artifact types are as follows
 
 # Setup
 
