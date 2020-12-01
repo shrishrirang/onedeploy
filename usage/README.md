@@ -27,7 +27,7 @@ Query parameters:
 
 # Setup
 
-Instructions assume you are running from *__bash__* on Linux or WSL in Windows.
+Instructions assume you are running from *__bash on Linux__* or *__WSL in Windows__*.
 
 Before proceeding any further, define the `$cred` environment variable by running the following script. To run the script, edit the placeholder values for `sitename`, `username` and `password`. [This](https://github.com/projectkudu/kudu/wiki/Deployment-credentials) wiki page explains how you can get the [credentials for your web app](https://github.com/projectkudu/kudu/wiki/Deployment-credentials).
 
