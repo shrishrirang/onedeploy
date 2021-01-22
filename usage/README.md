@@ -66,7 +66,7 @@ curl -X POST -u $cred "https://$sitename.scm.azurewebsites.net/api/publish?type=
 curl -X POST -u $cred "https://$sitename.scm.azurewebsites.net/api/publish?type=jar&ignorestack=true" --data-binary @'../apps/bin/petclinic-use-java8.jar'
 ```
 
-## Deploy ear (not available yet)
+## Deploy ear (JBoss EAP - only on Linux)
 
 ```bash
 curl -X POST -u $cred "https://$sitename.scm.azurewebsites.net/api/publish?type=ear&ignorestack=true" --data-binary @'../apps/bin/petclinic-use-java8.jar'
